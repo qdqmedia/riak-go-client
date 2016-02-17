@@ -17,6 +17,7 @@ import (
 // UpdateCounterCommand is used to increment or decrement a counter data type in Riak KV
 type UpdateCounterCommand struct {
 	commandImpl
+	retryableCommandImpl
 	Response *UpdateCounterResponse
 	protobuf proto.Message
 	isLegacy bool
@@ -235,6 +236,7 @@ func (builder *UpdateCounterCommandBuilder) Build() (Command, error) {
 // FetchCounterCommand fetches a counter CRDT from Riak
 type FetchCounterCommand struct {
 	commandImpl
+	retryableCommandImpl
 	Response *FetchCounterResponse
 	protobuf *rpbRiakDT.DtFetchReq
 }
@@ -380,6 +382,7 @@ func (builder *FetchCounterCommandBuilder) Build() (Command, error) {
 // UpdateSetCommand stores or updates a set CRDT in Riak
 type UpdateSetCommand struct {
 	commandImpl
+	retryableCommandImpl
 	Response *UpdateSetResponse
 	protobuf *rpbRiakDT.DtUpdateReq
 }
@@ -561,6 +564,7 @@ func (builder *UpdateSetCommandBuilder) Build() (Command, error) {
 // FetchSetCommand fetches a set CRDT from Riak
 type FetchSetCommand struct {
 	commandImpl
+	retryableCommandImpl
 	Response *FetchSetResponse
 	protobuf *rpbRiakDT.DtFetchReq
 }
@@ -709,6 +713,7 @@ func (builder *FetchSetCommandBuilder) Build() (Command, error) {
 // UpdateMapCommand updates a map CRDT in Riak
 type UpdateMapCommand struct {
 	commandImpl
+	retryableCommandImpl
 	Response *UpdateMapResponse
 	op       *MapOperation
 	protobuf *rpbRiakDT.DtUpdateReq
@@ -1252,6 +1257,7 @@ func (builder *UpdateMapCommandBuilder) Build() (Command, error) {
 // FetchMapCommand fetches a map CRDT from Riak
 type FetchMapCommand struct {
 	commandImpl
+	retryableCommandImpl
 	Response *FetchMapResponse
 	protobuf *rpbRiakDT.DtFetchReq
 }

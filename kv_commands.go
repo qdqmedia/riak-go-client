@@ -22,6 +22,7 @@ type ConflictResolver interface {
 // FetchValueCommand is used to fetch / get a value from Riak KV
 type FetchValueCommand struct {
 	commandImpl
+	retryableCommandImpl
 	Response *FetchValueResponse
 	protobuf *rpbRiakKV.RpbGetReq
 	resolver ConflictResolver
@@ -247,6 +248,7 @@ func (builder *FetchValueCommandBuilder) Build() (Command, error) {
 // StoreValueCommand used to store a value from Riak KV.
 type StoreValueCommand struct {
 	commandImpl
+	retryableCommandImpl
 	Response *StoreValueResponse
 	value    *Object
 	protobuf *rpbRiakKV.RpbPutReq
@@ -520,6 +522,7 @@ func (builder *StoreValueCommandBuilder) Build() (Command, error) {
 // DeleteValueCommand is used to delete a value from Riak KV.
 type DeleteValueCommand struct {
 	commandImpl
+	retryableCommandImpl
 	Response bool
 	protobuf *rpbRiakKV.RpbDelReq
 }
@@ -994,6 +997,7 @@ func (builder *ListKeysCommandBuilder) Build() (Command, error) {
 // FetchPreflistCommand is used to fetch the preference list for a key from Riak KV
 type FetchPreflistCommand struct {
 	commandImpl
+	retryableCommandImpl
 	Response *FetchPreflistResponse
 	protobuf *rpbRiakKV.RpbGetBucketKeyPreflistReq
 }
