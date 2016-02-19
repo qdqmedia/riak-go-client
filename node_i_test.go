@@ -166,7 +166,6 @@ func TestRecoverViaDefaultPingHealthCheck(t *testing.T) {
 	close(stateChan)
 }
 
-// TODO FUTURE NB: this has been a bit of a Heisen-test
 func TestRecoverAfterConnectionComesUpViaDefaultPingHealthCheck(t *testing.T) {
 	o := &testListenerOpts{
 		test: t,

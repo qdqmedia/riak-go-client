@@ -358,23 +358,6 @@ func (cm *connectionManager) manageConnections() {
 
 			logDebug("[connectionManager]", "(%v) expired %d connections.", cm, count)
 
-			if cm.connectionCounter.isLessThan(cm.minConnections) {
-				logDebug("[connectionManager]", "(%v) creating connections to reach mininum at %v", cm, t)
-				count = 0
-				for cm.connectionCounter.isLessThan(cm.minConnections) {
-					conn, err := cm.create()
-					if err == nil {
-						count++
-						if perr := cm.put(conn); perr != nil {
-							logErr("[connectionManager]", perr)
-						}
-					} else {
-						logErr("[connectionManager]", err)
-					}
-				}
-				logDebug("[connectionManager]", "(%v) created %d connections.", cm, count)
-			}
-
 			if !cm.isStateLessThan(cmShuttingDown) {
 				logDebug("[connectionManager]", "(%v) connection expiration routine is quitting.", cm)
 			}
