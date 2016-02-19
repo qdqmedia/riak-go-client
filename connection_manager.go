@@ -309,15 +309,15 @@ func (cm *connectionManager) remove(conn *connection) error {
 }
 
 func (cm *connectionManager) manageConnections() {
-	logDebug("[connectionManager]", "connection expiration/creation routine is starting")
+	logDebug("[connectionManager]", "connection expiration routine is starting")
 	for {
 		select {
 		case <-cm.stopChan:
-			logDebug("[connectionManager]", "connection expiration/creation routine is quitting")
+			logDebug("[connectionManager]", "connection expiration routine is quitting")
 			return
 		case t := <-cm.expireTicker.C:
 			if !cm.isStateLessThan(cmShuttingDown) {
-				logDebug("[connectionManager]", "(%v) connection expiration/creation routine is quitting.", cm)
+				logDebug("[connectionManager]", "(%v) connection expiration routine is quitting.", cm)
 			}
 
 			logDebug("[connectionManager]", "(%v) expiring connections at %v", cm, t)

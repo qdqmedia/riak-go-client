@@ -185,8 +185,9 @@ func TestRecoverAfterConnectionComesUpViaDefaultPingHealthCheck(t *testing.T) {
 		listenerStarted := false
 		nodeIsRunningCount := 0
 		for {
+			logDebug("[TestRecoverAfterConnectionComesUpViaDefaultPingHealthCheck]", "waiting on stateChan...")
 			if nodeState, ok := <-stateChan; ok {
-				logDebug("[TestRecoverAfterConnectionComesUpViaDefaultPingHealthCheck]", "nodeState: '%v'", nodeState)
+				logDebug("[TestRecoverAfterConnectionComesUpViaDefaultPingHealthCheck]", "received nodeState: '%v'", nodeState)
 				if node.isCurrentState(nodeRunning) {
 					nodeIsRunningCount++
 				}
@@ -221,8 +222,9 @@ func TestRecoverAfterConnectionComesUpViaDefaultPingHealthCheck(t *testing.T) {
 	go func() {
 		node.setStateFunc = func(sd *stateData, st state) {
 			origSetStateFunc(&node.stateData, st)
-			logDebug("[TestRecoverAfterConnectionComesUpViaDefaultPingHealthCheck]", "sending state '%v' down stateChan", st)
+			logDebug("[TestRecoverAfterConnectionComesUpViaDefaultPingHealthCheck]", "SENDING state '%v' down stateChan", st)
 			stateChan <- st
+			logDebug("[TestRecoverAfterConnectionComesUpViaDefaultPingHealthCheck]", "SENT state '%v' down stateChan", st)
 		}
 		node.start()
 
