@@ -5,6 +5,7 @@ import (
 	"encoding/binary"
 	"fmt"
 	"sync/atomic"
+	"time"
 
 	proto "github.com/golang/protobuf/proto"
 )
@@ -80,6 +81,18 @@ type streamingCommand interface {
 // to be executed
 type CommandBuilder interface {
 	Build() (Command, error)
+}
+
+type timeoutCommand interface {
+	getTimeout() time.Duration
+}
+
+type timeoutImpl struct {
+	timeout time.Duration
+}
+
+func (cmd *timeoutImpl) getTimeout() time.Duration {
+	return cmd.timeout
 }
 
 // Command interface enforces proper structure of a Command object
