@@ -36,9 +36,9 @@ func (cmd *retryableCommandImpl) getLastNode() *Node {
 }
 
 type commandImpl struct {
-	error          error
-	success        bool
-	name           string
+	error   error
+	success bool
+	name    string
 }
 
 func (cmd *commandImpl) Success() bool {

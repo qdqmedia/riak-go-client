@@ -231,6 +231,7 @@ func TestRecoverAfterConnectionComesUpViaDefaultPingHealthCheck(t *testing.T) {
 				if !listenerStarted && node.isCurrentState(nodeHealthChecking) {
 					logDebug("[TestRecoverAfterConnectionComesUpViaDefaultPingHealthCheck]", "STARTING LISTENER")
 					tl.start()
+					listenerStarted = true
 				}
 			} else {
 				t.Error("[TestRecoverAfterConnectionComesUpViaDefaultPingHealthCheck] stateChan closed before recovering via healthcheck")
